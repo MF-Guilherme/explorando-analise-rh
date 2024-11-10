@@ -1,46 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-class Program
+class Programa
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Leitura da entrada do usuário
-        string input = Console.ReadLine();
-
-        // Processamento da entrada
-        List<string> departamentos = input.Split(',')
-                                          .ToList();
+        // Entrada das notas
+        string entrada = Console.ReadLine();
         
-        // Contagem de funcionários por departamento
-        Dictionary<string, int> contagemDepartamentos = ContarFuncionariosPorDepartamento(departamentos);
-
-        // Formatação da saída
-        var resultado = string.Join(Environment.NewLine, 
-                                    contagemDepartamentos.OrderBy(depto => depto.Key)
-                                                         .Select(depto => $"{depto.Key}: {depto.Value}"));
-
-        Console.WriteLine(resultado);
-    }
-
-		// Método que conta o número de funcionários em cada departamento.
-    static Dictionary<string, int> ContarFuncionariosPorDepartamento(List<string> departamentos)
-    {
-        var contagem = new Dictionary<string, int>();
+        // Separar os valores e convertê-los para inteiros
+        string[] notasString = entrada.Split(',');
+        int produtividade = int.Parse(notasString[0]);
+        int qualidade = int.Parse(notasString[1]);
+        int pontualidade = int.Parse(notasString[2]);
         
-				for (int i = 0; i < departamentos.Count; i++)
-                {
-                    if (!contagem.ContainsKey(departamentos[i]))
-                    {
-                        contagem.Add(departamentos[i], 1);
-                    } 
-                    else
-                    {
-                        contagem[departamentos[i]] += 1;
-                    }
-                }
-				
-        return contagem;
+        // TODO: Calcule a média
+        double media = (produtividade + qualidade + pontualidade) / 3;
+        
+        // TODO: Verifique a elegibilidade para bônus
+        
+        string elegivelParaBonus = (media >= 7 ? "Sim" : "Nao");
+        
+        // Exibir os resultados
+        Console.WriteLine($"Media: {media}");
+        Console.WriteLine($"Elegivel para bonus: {elegivelParaBonus}");
     }
 }
